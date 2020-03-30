@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="25dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comida_favorita"
+        android:textSize="25sp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup_id"
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:layout_margin="20dp">
+
+        <RadioButton
+            android:id="@+id/churrasco_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/churrasco" />
+
+        <RadioButton
+            android:id="@+id/feijoada_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/feijoada" />
+
+        <RadioButton
+            android:id="@+id/mocoto_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mocoto" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button_escolher_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Escolher" />
+
+    <TextView
+        android:id="@+id/textView_exibe_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
+</LinearLayout>

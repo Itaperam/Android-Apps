@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RaddioButton</string>
+    <string name="comida_favorita">Qual sua comida favorita</string>
+    <string name="churrasco">Churrasco</string>
+    <string name="feijoada">Feijoada</string>
+    <string name="mocoto">Mocotó</string>
+</resources>

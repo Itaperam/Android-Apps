@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Som dos bichos</string>
+    <string name="gato">gato</string>
+    <string name="leao">leao</string>
+    <string name="macaco">macaco</string>
+    <string name="ovelha">ovelha</string>
+    <string name="vaca">vaca</string>
+    <string name="direitos">direitos</string>
+    <string name="logo">logo</string>
+</resources>

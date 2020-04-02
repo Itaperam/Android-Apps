@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PreferenciaCor</string>
+    <string name="qual_cor">Qual  cor você prefere?</string>
+    <string name="cor_azul">Azul</string>
+    <string name="cor_laranja">Laranja</string>
+    <string name="cor_verde">Verde</string>
+    <string name="botao_salvar">Salvar</string>
+</resources>

@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,6 +13,9 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.Random;
 
@@ -34,8 +38,8 @@ public class FlappyBird extends ApplicationAdapter {
 	//private ShapeRenderer shape;
 
 	//Atributos de configuração
-	private int larguraDispositivo;
-	private int alturaDispositivo;
+	private float larguraDispositivo;
+	private float alturaDispositivo;
 	private int estadoDoJogo=0;
 	private int pontuacao=0;
 
@@ -47,6 +51,13 @@ public class FlappyBird extends ApplicationAdapter {
 	private float deltaTime;
 	private float alturaEntreCanosRandomica;
 	private  boolean marcouPonto =  false;
+
+	//Câmera
+	private OrthographicCamera camera;
+	private Viewport viewport;
+	private final float VIRTUAL_WIDTH = 980;
+	private final float VIRTUAL_HEIGHT = 1024;
+
 
 	@Override
 	public void create () {
@@ -78,9 +89,16 @@ public class FlappyBird extends ApplicationAdapter {
 		canoTopo = new Texture("cano_topo.png");
 		gameOver = new Texture("game_over.png");
 
+		/************************************************
+		 * Configurações da câmera
+		 */
+		camera = new OrthographicCamera();
+		camera.position.set(VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2, 0);
+		viewport = new StretchViewport(VIRTUAL_WIDTH, VIRTUAL_WIDTH, camera);
+
 		//Captura as dimensões da tela
-		larguraDispositivo = Gdx.graphics.getWidth();
-		alturaDispositivo = Gdx.graphics.getHeight();
+		larguraDispositivo = VIRTUAL_WIDTH;
+		alturaDispositivo = VIRTUAL_HEIGHT;
 
 		posicaoInicialVertical = alturaDispositivo / 2;
 		posicaoMovimentocanoHorizontal = larguraDispositivo;
@@ -89,6 +107,10 @@ public class FlappyBird extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+
+		camera.update();
+		//Limpar frames anteriores
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
 		deltaTime = Gdx.graphics.getDeltaTime();
 		variacao += deltaTime * 10; //Suaviza o movimento de bater asas
@@ -139,6 +161,9 @@ public class FlappyBird extends ApplicationAdapter {
 			}
 		}
 
+		//Configurar dados e projeção da câmera
+		batch.setProjectionMatrix(camera.combined);
+
 		batch.begin();
 		batch.draw(fundo, 0, 0, larguraDispositivo, alturaDispositivo);
 		batch.draw(canoTopo, posicaoMovimentocanoHorizontal, alturaDispositivo / 2 + espacaoEntreCanos / 2 + alturaEntreCanosRandomica);
@@ -178,5 +203,10 @@ public class FlappyBird extends ApplicationAdapter {
 			//Gdx.app.log("Colisão", "Houve colisão");
 			estadoDoJogo = 2;
 		}
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		viewport.update(width, height);
 	}
 }
